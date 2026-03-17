@@ -75,15 +75,11 @@ const wrong = parseUnits('1.0', 18);   // 1e12x too large
 
 Use `forge` for deployment and `cast` for reads/writes. Do not use Hardhat.
 
-### Payment protocol: x402
-
-For per-request API billing, use the x402 protocol with the Radius facilitator:
-- Testnet: `https://facilitator.testnet.radiustech.xyz`
-
 ## Documentation
 
 - Full corpus: `https://docs.radiustech.xyz/llms-full.txt`
 - Key pages index: `https://docs.radiustech.xyz/llms.txt`
 - Developer docs: `https://docs.radiustech.xyz`
 - Network config: `https://docs.radiustech.xyz/developer-resources/network-configuration.md`
+- x402 integration: `https://docs.radiustech.xyz/developer-resources/x402-integration.md`
 - Ethereum divergence: `https://docs.radiustech.xyz/developer-resources/ethereum-divergence.md`
