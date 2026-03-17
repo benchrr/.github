@@ -42,8 +42,16 @@ export const radiusMainnet = defineChain({
   fees: {
     async estimateFeesPerGas() {
       const res = await fetch('https://network.radiustech.xyz/api/v1/network/transaction-cost');
+      if (!res.ok) throw new Error(`gas price fetch failed: ${res.status}`);
       const { gas_price_wei } = await res.json();
-      return { gasPrice: BigInt(gas_price_wei) };
+      const gasPrice = BigInt(gas_price_wei);
+      // Sanity bound: ~1000 gwei ceiling. Radius fees are ~1 gwei (~0.00001 USD).
+      // Protects against a compromised endpoint returning an inflated gas price.
+      const MAX_GAS_PRICE_WEI = BigInt('1000000000000');
+      if (gasPrice <= 0n || gasPrice > MAX_GAS_PRICE_WEI) {
+        throw new Error(`gas_price_wei out of range: ${gasPrice}`);
+      }
+      return { gasPrice };
     },
   },
 });
